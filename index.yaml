@@ -46,6 +46,16 @@ entries:
   hub:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-04T16:29:46.460885171Z"
+    description: A Helm chart for Kubernetes
+    digest: ec6702c3d35d94f75283919d6cd7d67be46523dfccceef2683f1813c716b5752
+    name: hub
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/hub-0.1.2/hub-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-07-04T08:48:20.974771688Z"
     description: A Helm chart for Kubernetes
     digest: 9ab3d625cbe4bc579f16607286335fd567f916345d136804bdac8c7414a2f5d2
@@ -184,4 +194,4 @@ entries:
     urls:
     - https://github.com/repows/helm/releases/download/visual-0.1.1/visual-0.1.1.tgz
     version: 0.1.1
-generated: "2024-07-04T10:17:32.570985857Z"
+generated: "2024-07-04T16:29:46.460902974Z"
