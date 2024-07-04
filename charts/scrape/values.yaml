@@ -4,24 +4,26 @@ nameOverride: ""
 fullnameOverride: ""
 
 scrapy:
-  spiders:
-    - name: teams
-      enabled: true
-      schedule: "0 */12 * * *"
+  euro:
+    image: repows.io/scrape-euro
+    spiders:
+      - name: teams
+        enabled: true
+        schedule: "0 */12 * * *"
 
-    - name: players
-      enabled: true
-      schedule: "0 */12 * * *"
+      - name: players
+        enabled: true
+        schedule: "0 */12 * * *"
 
-    - name: player_attributes
-      enabled: true
-      schedule: "0 */8 * * *"
+      - name: player_attributes
+        enabled: true
+        schedule: "0 */8 * * *"
 
-    - name: results
-      enabled: true
-      schedule: "0 * * * *"
+      - name: results
+        enabled: true
+        schedule: "0 * * * *"
 
-    - name: standings
-      enabled: false
-      schedule: "0 * * * *"
+      - name: standings
+        enabled: false
+        schedule: "0 * * * *"
 

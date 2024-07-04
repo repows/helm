@@ -1,14 +1,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: scrape-player-attributes
+  name: scrape-euro-player-attributes
   namespace: scrape
 spec:
   template:
     spec:
       containers:
         - name: scrape-one
-          image: repows.io/scrape-one
+          image: repows.io/scrape-euro
           imagePullPolicy: Always
           command:
             - /bin/sh

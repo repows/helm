@@ -1,9 +1,9 @@
-{{- range .Values.scrapy.spiders -}}
+{{- range .Values.scrapy.euro.spiders -}}
 {{- if .enabled -}}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: scrape-{{ .name | replace "_" "-" }}
+  name: scrape-euro-{{ .name | replace "_" "-" }}
   namespace: {{ $.Release.Namespace }}
 spec:
   schedule: {{ .schedule }}
@@ -12,8 +12,8 @@ spec:
       template:
         spec:
           containers:
-            - name: scrape-one
-              image: repows.io/scrape-one
+            - name: scrape-euro
+              image: {{ default .image $.Values.scrapy.euro.image }}
               imagePullPolicy: Always
               command:
                 - /bin/sh
