@@ -1,0 +1,149 @@
+global: { }
+
+nameOverride: ""
+fullnameOverride: ""
+
+
+dagster:
+  enabled: true
+  fullnameOverride: dagster
+
+  aws:
+    accessKey: ""
+    secretKey: ""
+
+  dagsterWebserver:
+    image:
+      pullPolicy: IfNotPresent
+    service:
+      type: LoadBalancer
+    nodeSelector:
+      kubernetes.io/hostname: master
+
+  postgresql:
+    postgresqlDatabase: dagster
+    postgresqlUsername: dagster
+    postgresqlPassword: password
+    persistence:
+      existingClaim: dagster-postgresql-pvc
+      size: 16Gi
+    master:
+      nodeSelector:
+        kubernetes.io/hostname: master
+
+  rabbitmq:
+    enabled: true
+    persistence:
+      existingClaim: dagster-rabbitmq-pvc
+      size: 16Gi
+    nodeSelector:
+      kubernetes.io/hostname: master
+
+  dagsterDaemon:
+    runCoordinator:
+      config:
+        queuedRunCoordinator:
+          maxConcurrentRuns: 10
+    nodeSelector:
+      kubernetes.io/hostname: master
+
+  runLauncher:
+    type: K8sRunLauncher
+
+  dagster-user-deployments:
+    deployments:
+      - name: typo
+        image:
+          repository: "repows.io/dagster-typo"
+          tag: latest
+          pullPolicy: Always
+        dagsterApiGrpcArgs:
+          - "--module-name"
+          - "typo"
+        port: 3030
+        includeConfigInLaunchedRuns:
+          enabled: true
+        envConfigMaps:
+          - name: dagster-typo-config
+        volumes:
+          - name: dagster-aws
+            configMap:
+              name: dagster-aws
+          - name: dagster-data
+            persistentVolumeClaim:
+              claimName: dagster-typo-data-pvc
+          - name: dagster-storage
+            persistentVolumeClaim:
+              claimName: dagster-typo-storage-pvc
+        volumeMounts:
+          - mountPath: /root/.aws
+            name: dagster-aws
+            readOnly: true
+          - mountPath: /opt/dagster/app/data
+            name: dagster-data
+          - mountPath: /opt/dagster/dagster_home/storage
+            name: dagster-storage
+
+      - name: euro
+        image:
+          repository: "repows.io/dagster-euro"
+          tag: latest
+          pullPolicy: Always
+        dagsterApiGrpcArgs:
+          - "--module-name"
+          - "euro"
+        port: 3030
+        includeConfigInLaunchedRuns:
+          enabled: true
+        envConfigMaps:
+          - name: dagster-euro-config
+        volumes:
+          - name: dagster-aws
+            configMap:
+              name: dagster-aws
+          - name: dagster-data
+            persistentVolumeClaim:
+              claimName: dagster-euro-data-pvc
+          - name: dagster-storage
+            persistentVolumeClaim:
+              claimName: dagster-euro-storage-pvc
+        volumeMounts:
+          - mountPath: /root/.aws
+            name: dagster-aws
+            readOnly: true
+          - mountPath: /opt/dagster/app/data
+            name: dagster-data
+          - mountPath: /opt/dagster/dagster_home/storage
+            name: dagster-storage
+
+      - name: codec
+        image:
+          repository: "repows.io/dagster-codec"
+          tag: latest
+          pullPolicy: Always
+        dagsterApiGrpcArgs:
+          - "--module-name"
+          - "codec"
+        port: 3030
+        includeConfigInLaunchedRuns:
+          enabled: true
+        envConfigMaps:
+          - name: dagster-codec-config
+        volumes:
+          - name: dagster-aws
+            configMap:
+              name: dagster-aws
+          - name: dagster-data
+            persistentVolumeClaim:
+              claimName: dagster-codec-data-pvc
+          - name: dagster-storage
+            persistentVolumeClaim:
+              claimName: dagster-codec-storage-pvc
+        volumeMounts:
+          - mountPath: /root/.aws
+            name: dagster-aws
+            readOnly: true
+          - mountPath: /opt/dagster/app/data
+            name: dagster-data
+          - mountPath: /opt/dagster/dagster_home/storage
+            name: dagster-storage

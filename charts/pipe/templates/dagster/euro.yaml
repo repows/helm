@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dagster-euro-config
+  namespace: {{ .Release.Namespace }}
+data: { }
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: dagster-euro-data-pv
+spec:
+  storageClassName: local
+  capacity:
+    storage: 4Gi
+  volumeMode: Filesystem
+  hostPath:
+    path: /kube/repows/pipe/dagster/dagster-euro-data-pv
+  accessModes: [ "ReadWriteOnce" ]
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dagster-euro-data-pvc
+  namespace: {{ .Release.Namespace }}
+spec:
+  storageClassName: local
+  accessModes: [ "ReadWriteOnce" ]
+  volumeName: dagster-euro-data-pv
+  resources:
+    requests:
+      storage: 4Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: dagster-euro-storage-pv
+spec:
+  storageClassName: local
+  capacity:
+    storage: 16Gi
+  volumeMode: Filesystem
+  hostPath:
+    path: /kube/repows/pipe/dagster/dagster-euro-storage-pv
+  accessModes: [ "ReadWriteOnce" ]
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dagster-euro-storage-pvc
+  namespace: {{ .Release.Namespace }}
+spec:
+  storageClassName: local
+  accessModes: [ "ReadWriteOnce" ]
+  volumeName: dagster-euro-storage-pv
+  resources:
+    requests:
+      storage: 16Gi
+---

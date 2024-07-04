@@ -1,0 +1,89 @@
+apiVersion: sparkoperator.k8s.io/v1beta2
+kind: SparkApplication
+metadata:
+  name: spark-initial
+  namespace: sparks
+spec:
+  type: Python
+  mode: cluster
+  image: spark:3.5.0
+  mainClass: org.apache.spark.examples.SparkPi
+  mainApplicationFile: local:///opt/spark/examples/jars/spark-examples_2.12-3.5.0.jar
+  sparkVersion: 3.5.0
+  driver:
+    env: [ ]
+    labels:
+      version: 3.5.0
+    serviceAccount: spark-operator-spark
+    volumeMounts:
+      - name: spark-work
+        mountPath: /mnt/spark/work
+  executor:
+    labels:
+      version: 3.5.0
+    volumeMounts:
+      - name: spark-data
+        mountPath: /mnt/spark/data
+      - name: spark-work
+        mountPath: /mnt/spark/work
+  volumes:
+    - name: spark-initial-data
+      persistentVolumeClaim:
+        claimName: spark-initial-pvc
+    - name: spark-initial-work
+      emptyDir:
+        sizeLimit: 5Gi
+---
+apiVersion: sparkoperator.k8s.io/v1beta2
+kind: SparkApplication
+metadata:
+  name: spark-etl
+  namespace: sparks
+spec:
+  type: Python
+  mode: cluster
+  image: repows.io/spark-etl
+  imagePullPolicy: Always
+  mainApplicationFile: local:///opt/spark/work-dir/main.py
+  sparkVersion: 3.5.0
+  arguments:
+    - --task
+    - events
+  driver:
+    env:
+      - name: PYSPARK_PYTHON
+        value: /usr/bin/python3
+    labels:
+      version: 3.5.0
+    serviceAccount: spark
+    volumeMounts:
+      - name: spark-work
+        mountPath: /mnt/spark/work
+  executor:
+    labels:
+      version: 3.5.0
+    volumeMounts:
+      - name: spark-data
+        mountPath: /mnt/spark/data
+      - name: spark-work
+        mountPath: /mnt/spark/work
+  volumes:
+    - name: spark-data
+      emptyDir:
+        sizeLimit: 5Gi
+    - name: spark-work
+      emptyDir:
+        sizeLimit: 5Gi
+  sparkConf:
+    spark.sql.extensions: "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions"
+    spark.sql.defaultCatalog: "iceberg"
+    spark.sql.catalog.iceberg.io-impl: "org.apache.iceberg.aws.s3.S3FileIO"
+    spark.sql.catalog.iceberg: "org.apache.iceberg.spark.SparkCatalog"
+    spark.sql.catalog.iceberg.type: "rest"
+    spark.sql.catalog.iceberg.uri: "http://iceberg.io"
+    spark.sql.catalog.iceberg.warehouse: "s3://iceberg/"
+    spark.sql.catalog.iceberg.client.region: "ap-southeast-1"
+    spark.sql.catalog.iceberg.s3.access-key-id: "admin"
+    spark.sql.catalog.iceberg.s3.secret-access-key: "password"
+    spark.sql.catalog.iceberg.s3.endpoint: "http://lakehouse.io"
+    spark.sql.catalog.iceberg.s3.path-style-access: "true"

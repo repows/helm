@@ -1,0 +1,10 @@
+# IDE
+.idea
+.vscode
+
+# Helm
+*/**/Chart.lock
+*/**/*.tgz
+
+# Taskfile
+taskfile.yaml

@@ -1,0 +1,25 @@
+{{- range .Values.scrapy.spiders -}}
+{{- if .enabled -}}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scrape-{{ .name | replace "_" "-" }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  schedule: {{ .schedule }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: scrape-one
+              image: repows.io/scrape-one
+              imagePullPolicy: Always
+              command:
+                - /bin/sh
+                - -c
+                - scrapy crawl {{ .name }} -s ENVIRONMENT=prod
+          restartPolicy: Never
+---
+{{- end -}}
+{{- end -}}
