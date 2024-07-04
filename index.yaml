@@ -1,6 +1,76 @@
 apiVersion: v1
 entries:
+  dash:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-04T08:48:20.7774296Z"
+    dependencies:
+    - condition: lightdash.enabled
+      name: lightdash
+      repository: file://charts/lightdash
+      version: 0.9.0
+    description: A Helm chart for Kubernetes
+    digest: d96345264ad6c9438b2029c24a303032104a6135ae94ab45bfc68c2f58e90c9e
+    name: dash
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/dash-0.1.1/dash-0.1.1.tgz
+    version: 0.1.1
+  dns:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-04T08:48:20.870427922Z"
+    dependencies:
+    - alias: dagster
+      condition: dagster.cloudflare.tunnel_token
+      name: cloudflare-tunnel-remote
+      repository: https://cloudflare.github.io/helm-charts
+      version: 0.1.1
+    - alias: superset
+      condition: dashboard.cloudflare.tunnel_token
+      name: cloudflare-tunnel-remote
+      repository: https://cloudflare.github.io/helm-charts
+      version: 0.1.1
+    - alias: lightdash
+      condition: lightdash.cloudflare.tunnel_token
+      name: cloudflare-tunnel-remote
+      repository: https://cloudflare.github.io/helm-charts
+      version: 0.1.1
+    description: A Helm chart for Kubernetes
+    digest: 940791cfb8624a4786b5ffad201c03906224fbb1993a45f99d8734d7e0983912
+    name: dns
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/dns-0.1.1/dns-0.1.1.tgz
+    version: 0.1.1
+  hub:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-04T08:48:20.974771688Z"
+    description: A Helm chart for Kubernetes
+    digest: 9ab3d625cbe4bc579f16607286335fd567f916345d136804bdac8c7414a2f5d2
+    name: hub
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/hub-0.1.1/hub-0.1.1.tgz
+    version: 0.1.1
   io:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-04T08:48:21.082378483Z"
+    dependencies:
+    - alias: lakehouse
+      condition: lakehouse.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 14.3.4
+    description: A Helm chart for Kubernetes
+    digest: 07165cb06a46bb4b4d573f359d70c6e2e367d4c7c94a5d5c8fd571e279062a6e
+    name: io
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/io-0.1.1/io-0.1.1.tgz
+    version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2024-07-04T08:46:16.721271446Z"
@@ -17,4 +87,91 @@ entries:
     urls:
     - https://github.com/repows/helm/releases/download/io-0.1.0/io-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-04T08:46:16.7212843Z"
+  monitor:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-04T08:48:21.237269958Z"
+    dependencies:
+    - alias: promestack
+      condition: promestack.enabled
+      name: kube-prometheus-stack
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 61.2.0
+    description: A Helm chart for Kubernetes
+    digest: 53aae5b05cd2db1f77c2a102fcf125c6a637c6bb5b45bb38ff94be14d45a9493
+    name: monitor
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/monitor-0.1.1/monitor-0.1.1.tgz
+    version: 0.1.1
+  pipe:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-04T08:48:21.388525667Z"
+    dependencies:
+    - name: dagster
+      repository: https://dagster-io.github.io/helm
+      version: 1.7.6
+    description: A Helm chart for Kubernetes
+    digest: 18b3d1b0f3a3a56343f7d47adff3ac343f303f4f817f2f3f15992554da33629d
+    name: pipe
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/pipe-0.1.1/pipe-0.1.1.tgz
+    version: 0.1.1
+  query:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-04T08:48:21.511019312Z"
+    description: A Helm chart for Kubernetes
+    digest: f11976109f1bbe1ddcc4c00b7fec66f7261968263b39544282dd168bf0fe6f8f
+    name: query
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/query-0.1.1/query-0.1.1.tgz
+    version: 0.1.1
+  scrape:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-04T08:48:21.615048594Z"
+    description: A Helm chart for Kubernetes
+    digest: 81db4442de79e79453992b0b22716dec1f08dcce5fdc91bc350541f38a749dfe
+    name: scrape
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/scrape-0.1.1/scrape-0.1.1.tgz
+    version: 0.1.1
+  spark:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-04T08:48:21.719571983Z"
+    dependencies:
+    - alias: operator
+      condition: operator.enabled
+      name: spark-operator
+      repository: https://kubeflow.github.io/spark-operator
+      version: 1.2.15
+    description: A Helm chart for Kubernetes
+    digest: a2254431b4528bd732085aff6cd1d729051370fcb78c97b89278adab561481a8
+    name: spark
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/spark-0.1.1/spark-0.1.1.tgz
+    version: 0.1.1
+  visual:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-04T08:48:21.859384163Z"
+    dependencies:
+    - condition: superset.enabled
+      name: superset
+      repository: http://apache.github.io/superset/
+      version: 0.12.11
+    description: A Helm chart for Kubernetes
+    digest: b25a2cf8eac4d3e98e2d991d7d8e806a24d59ee46fe71389936eed8fd6ddc876
+    name: visual
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/visual-0.1.1/visual-0.1.1.tgz
+    version: 0.1.1
+generated: "2024-07-04T08:48:21.859399271Z"
