@@ -133,6 +133,16 @@ entries:
   scrape:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-04T10:17:32.570966111Z"
+    description: A Helm chart for Kubernetes
+    digest: 5cb99024ebf12057d5fe9ec17629d48a69de0b2d35da4fd80a0664e7a8050bac
+    name: scrape
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/scrape-0.1.2/scrape-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-07-04T08:48:21.615048594Z"
     description: A Helm chart for Kubernetes
     digest: 81db4442de79e79453992b0b22716dec1f08dcce5fdc91bc350541f38a749dfe
@@ -174,4 +184,4 @@ entries:
     urls:
     - https://github.com/repows/helm/releases/download/visual-0.1.1/visual-0.1.1.tgz
     version: 0.1.1
-generated: "2024-07-04T08:48:21.859399271Z"
+generated: "2024-07-04T10:17:32.570985857Z"
