@@ -61,7 +61,7 @@ spec:
     spec:
       containers:
         - name: notebook
-          image: repows.io/notebook-spark
+          image: repows.io/notebook:spark
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: /home/jovyan/work
