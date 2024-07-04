@@ -1,0 +1,20 @@
+apiVersion: v1
+entries:
+  io:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-04T08:46:16.721271446Z"
+    dependencies:
+    - alias: lakehouse
+      condition: lakehouse.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 14.3.4
+    description: A Helm chart for Kubernetes
+    digest: 0ff42bc4dbd1ba7634b807ca12f3edfed7fca1d414c7c1815df1b30ed16a48e0
+    name: io
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/io-0.1.0/io-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-07-04T08:46:16.7212843Z"
