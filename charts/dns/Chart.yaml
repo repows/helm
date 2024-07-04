@@ -3,24 +3,24 @@ name: dns
 description: A Helm chart for Kubernetes
 
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.16.0"
 
 dependencies:
   - alias: dagster
-    version: 0.1.0
+    version: 0.1.1
     name: cloudflare-tunnel-remote
     condition: dagster.cloudflare.tunnel_token
     repository: https://cloudflare.github.io/helm-charts
 
   - alias: superset
-    version: 0.1.0
+    version: 0.1.1
     name: cloudflare-tunnel-remote
     condition: dashboard.cloudflare.tunnel_token
     repository: https://cloudflare.github.io/helm-charts
 
   - alias: lightdash
-    version: 0.1.0
+    version: 0.1.1
     name: cloudflare-tunnel-remote
     condition: lightdash.cloudflare.tunnel_token
     repository: https://cloudflare.github.io/helm-charts

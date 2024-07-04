@@ -56,7 +56,7 @@ iceberg:
     region: ap-southeast-1
 
 warehouse:
-  instances: 1
+  instances: 2
 
   aws:
     bucketName: ""
