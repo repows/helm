@@ -71,6 +71,9 @@ spec:
       script: |
         CREATE USER app PASSWORD 'password' SUPERUSER;
         CREATE DATABASE app OWNER app;
+        CREATE DATABASE euro OWNER app;
+        CREATE DATABASE typo OWNER app;
+        CREATE DATABASE codec OWNER app;
 ---
 apiVersion: stackgres.io/v1
 kind: SGCluster
