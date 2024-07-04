@@ -117,6 +117,20 @@ entries:
   pipe:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-04T18:48:42.90417096Z"
+    dependencies:
+    - name: dagster
+      repository: https://dagster-io.github.io/helm
+      version: 1.7.6
+    description: A Helm chart for Kubernetes
+    digest: 2abae45e9b936bc538bb050b0cf5620c6bf321baaee0a8879fa24aa98b28e7c4
+    name: pipe
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/pipe-0.1.2/pipe-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-07-04T08:48:21.388525667Z"
     dependencies:
     - name: dagster
@@ -290,4 +304,4 @@ entries:
     urls:
     - https://github.com/repows/helm/releases/download/visual-0.1.1/visual-0.1.1.tgz
     version: 0.1.1
-generated: "2024-07-04T17:29:38.834399473Z"
+generated: "2024-07-04T18:48:42.904193312Z"
