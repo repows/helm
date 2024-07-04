@@ -18,7 +18,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: spark-driver-{{ .name }}
-  namespace: hub
 subjects:
   - kind: ServiceAccount
     name: spark
