@@ -8,6 +8,9 @@ dagster:
   enabled: true
   fullnameOverride: dagster
 
+  global:
+    serviceAccountName: default
+
   aws:
     accessKey: ""
     secretKey: ""
