@@ -1,0 +1,30 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: opensearch
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
+reclaimPolicy: Retain
+---
+{{- range $i, $e := until 2 -}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: opensearch-pv-{{ $i }}
+spec:
+  capacity:
+    storage: {{ $.Values.opensearch.persistence.size }}
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: opensearch
+  hostPath:
+    path: /kube/repows/io/opensearch/opensearch-pv-{{ $i }}
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - master
+---
+{{- end -}}
