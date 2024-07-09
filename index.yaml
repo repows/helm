@@ -288,6 +288,22 @@ entries:
     urls:
     - https://github.com/repows/helm/releases/download/spark-0.1.1/spark-0.1.1.tgz
     version: 0.1.1
+  sql:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-09T10:25:12.644998323Z"
+    dependencies:
+    - condition: trino.enabled
+      name: trino
+      repository: https://trinodb.github.io/charts/
+      version: 0.25.0
+    description: A Helm chart for Kubernetes
+    digest: be1b3f285b747a9b01242aa8c665a1280e211fc4cd74f5f8f0c50b0964464f8b
+    name: sql
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/sql-0.1.0/sql-0.1.0.tgz
+    version: 0.1.0
   visual:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -304,4 +320,4 @@ entries:
     urls:
     - https://github.com/repows/helm/releases/download/visual-0.1.1/visual-0.1.1.tgz
     version: 0.1.1
-generated: "2024-07-04T18:48:42.904193312Z"
+generated: "2024-07-09T10:25:12.824519624Z"
