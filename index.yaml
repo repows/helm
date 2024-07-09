@@ -67,6 +67,26 @@ entries:
   io:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-09T10:31:26.001113214Z"
+    dependencies:
+    - alias: lakehouse
+      condition: lakehouse.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 14.3.4
+    - condition: opensearch.enabled
+      name: opensearch
+      repository: https://opensearch-project.github.io/helm-charts
+      version: 2.21.0
+    description: A Helm chart for Kubernetes
+    digest: d03d8f6fc8d5f3d8e1fd07fa08a3002c6a0c8d30dae333f0fedab75c5cde5995
+    name: io
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/io-0.1.2/io-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-07-04T08:48:21.082378483Z"
     dependencies:
     - alias: lakehouse
@@ -335,4 +355,4 @@ entries:
     urls:
     - https://github.com/repows/helm/releases/download/visual-0.1.1/visual-0.1.1.tgz
     version: 0.1.1
-generated: "2024-07-09T10:29:10.115125729Z"
+generated: "2024-07-09T10:31:26.281200174Z"
