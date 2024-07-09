@@ -12,3 +12,8 @@ dependencies:
     version: 14.3.4
     condition: lakehouse.enabled
     repository: oci://registry-1.docker.io/bitnamicharts
+
+  - name: opensearch
+    version: 2.21.0
+    condition: opensearch.enabled
+    repository: https://opensearch-project.github.io/helm-charts

@@ -11,3 +11,9 @@ dependencies:
     version: 0.12.11
     condition: superset.enabled
     repository: http://apache.github.io/superset/
+
+  - alias: opensearch
+    version: 2.19.0
+    name: opensearch-dashboards
+    condition: opensearch.enabled
+    repository: https://opensearch-project.github.io/helm-charts

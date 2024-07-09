@@ -51,3 +51,12 @@ superset:
                   operator: In
                   values:
                     - master
+
+opensearch:
+  enabled: true
+  fullnameOverride: opensearch
+  opensearchHosts: "http://opensearch.io"
+
+  extraEnvs:
+    - name: DISABLE_SECURITY_DASHBOARDS_PLUGIN
+      value: "true"
