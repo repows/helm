@@ -1,0 +1,21 @@
+global: { }
+
+trino:
+  enabled: true
+  nameOverride: trino
+  fullnameOverride: trino
+  workerNameOverride: trino-worker
+  coordinatorNameOverride: trino-coordinator
+
+  server:
+    workers: 2
+
+  auth:
+    passwordAuth: "admin:password"
+
+  additionalCatalogs:
+    opensearch: |
+      connector.name=opensearch
+      opensearch.host=opensearch.io
+      opensearch.port=80
+      opensearch.default-schema-name=default
