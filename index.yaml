@@ -397,6 +397,26 @@ entries:
   visual:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-09T10:56:36.624682446Z"
+    dependencies:
+    - condition: superset.enabled
+      name: superset
+      repository: http://apache.github.io/superset/
+      version: 0.12.11
+    - alias: opensearch
+      condition: opensearch.enabled
+      name: opensearch-dashboards
+      repository: https://opensearch-project.github.io/helm-charts
+      version: 2.19.0
+    description: A Helm chart for Kubernetes
+    digest: c2195ebe1d545f8536e1676d52bc5f0aa443069ee30ebd113ed69848e73228d2
+    name: visual
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/visual-0.1.4/visual-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-07-09T10:50:42.594288702Z"
     dependencies:
     - condition: superset.enabled
@@ -450,4 +470,4 @@ entries:
     urls:
     - https://github.com/repows/helm/releases/download/visual-0.1.1/visual-0.1.1.tgz
     version: 0.1.1
-generated: "2024-07-09T10:50:42.594347812Z"
+generated: "2024-07-09T10:56:36.62473236Z"
