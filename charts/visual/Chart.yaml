@@ -3,7 +3,7 @@ name: visual
 description: A Helm chart for Kubernetes
 
 type: application
-version: 0.1.1
+version: 0.1.3
 appVersion: "1.16.0"
 
 dependencies:
@@ -11,3 +11,9 @@ dependencies:
     version: 0.12.11
     condition: superset.enabled
     repository: http://apache.github.io/superset/
+
+  - alias: opensearch
+    version: 2.19.0
+    name: opensearch-dashboards
+    condition: opensearch.enabled
+    repository: https://opensearch-project.github.io/helm-charts
