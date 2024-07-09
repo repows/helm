@@ -19,3 +19,8 @@ trino:
       opensearch.host=opensearch.io
       opensearch.port=80
       opensearch.default-schema-name=default
+
+    iceberg: |
+      connector.name=iceberg
+      iceberg.type=rest
+      iceberg.rest-catalog.uri=http://iceberg.io
