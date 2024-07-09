@@ -67,6 +67,26 @@ entries:
   io:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-09T10:37:06.923176093Z"
+    dependencies:
+    - alias: lakehouse
+      condition: lakehouse.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 14.3.4
+    - condition: opensearch.enabled
+      name: opensearch
+      repository: https://opensearch-project.github.io/helm-charts
+      version: 2.21.0
+    description: A Helm chart for Kubernetes
+    digest: 6d1c63d2c950173d99b0d6930e366ca7ae69791524f3f26835711b15a02c799d
+    name: io
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/io-0.1.3/io-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-07-09T10:31:26.001113214Z"
     dependencies:
     - alias: lakehouse
@@ -311,6 +331,21 @@ entries:
   sql:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-09T10:37:07.056740669Z"
+    dependencies:
+    - condition: trino.enabled
+      name: trino
+      repository: https://trinodb.github.io/charts/
+      version: 0.25.0
+    description: A Helm chart for Kubernetes
+    digest: 76de498e4c0a360fda6e3304ea43f3ae9eaa84d31a12e4f5598b71af4170b07b
+    name: sql
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/sql-0.1.2/sql-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-07-09T10:29:09.985247911Z"
     dependencies:
     - condition: trino.enabled
@@ -342,6 +377,26 @@ entries:
   visual:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-09T10:37:07.188875877Z"
+    dependencies:
+    - condition: superset.enabled
+      name: superset
+      repository: http://apache.github.io/superset/
+      version: 0.12.11
+    - alias: opensearch
+      condition: opensearch.enabled
+      name: opensearch-dashboards
+      repository: https://opensearch-project.github.io/helm-charts
+      version: 2.19.0
+    description: A Helm chart for Kubernetes
+    digest: 108901ab8202303482898dfe81547094a97bf7f009d8cad474c73d2c35459a2a
+    name: visual
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/visual-0.1.2/visual-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-07-04T08:48:21.859384163Z"
     dependencies:
     - condition: superset.enabled
@@ -355,4 +410,4 @@ entries:
     urls:
     - https://github.com/repows/helm/releases/download/visual-0.1.1/visual-0.1.1.tgz
     version: 0.1.1
-generated: "2024-07-09T10:31:26.281200174Z"
+generated: "2024-07-09T10:37:07.188910452Z"
