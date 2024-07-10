@@ -1,0 +1,105 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: catalog
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
+---
+{{- range $i, $e := until 2 -}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: catalog-pv-{{ $i }}
+spec:
+  capacity:
+    storage: 16Gi
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: catalog
+  claimRef:
+    namespace: {{ $.Release.Namespace }}
+    name: catalog-data-catalog-{{ $i }}  # reserved
+  hostPath:
+    path: /kube/repows/io/lakehouse/catalog-pv-{{ $i }}
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - master
+---
+{{- end -}}
+apiVersion: stackgres.io/v1
+kind: SGInstanceProfile
+metadata:
+  name: catalog-profile
+  namespace: {{ .Release.Namespace }}
+spec:
+  cpu: "256m"
+  memory: "1Gi"
+---
+apiVersion: stackgres.io/v1
+kind: SGPostgresConfig
+metadata:
+  name: catalog-pgconfig
+  namespace: {{ .Release.Namespace }}
+spec:
+  postgresVersion: "16"
+  postgresql.conf:
+    shared_buffers: "512MB"
+    random_page_cost: "1.5"
+    password_encryption: "scram-sha-256"
+    shared_preload_libraries: "pg_stat_statements,auto_explain"
+    log_checkpoints: "on"
+---
+apiVersion: stackgres.io/v1
+kind: SGPoolingConfig
+metadata:
+  name: catalog-poolconfig
+  namespace: {{ .Release.Namespace }}
+spec:
+  pgBouncer:
+    pgbouncer.ini:
+      pgbouncer:
+        pool_mode: transaction
+        max_client_conn: "1000"
+        default_pool_size: "80"
+---
+apiVersion: stackgres.io/v1
+kind: SGScript
+metadata:
+  name: catalog-scripts
+  namespace: {{ .Release.Namespace }}
+spec:
+  scripts:
+    - id: 0
+      version: 0
+      name: create-app
+      script: |
+        CREATE USER app PASSWORD 'password' SUPERUSER;
+        CREATE DATABASE iceberg OWNER app;
+---
+apiVersion: stackgres.io/v1
+kind: SGCluster
+metadata:
+  name: catalog
+  namespace: {{ .Release.Namespace }}
+spec:
+  postgres:
+    version: "16"
+    extensions: [ ]
+  instances: {{ .Values.catalog.instances }}
+  sgInstanceProfile: catalog-profile
+  profile: development
+  pods:
+    persistentVolume:
+      storageClass: catalog
+      size: 16Gi
+  managedSql:
+    scripts:
+      - sgScript: catalog-scripts
+  configurations:
+    sgPostgresConfig: catalog-pgconfig
+    sgPoolingConfig: catalog-poolconfig
+---

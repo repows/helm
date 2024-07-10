@@ -48,12 +48,8 @@ lakehouse:
 iceberg:
   instances: 1
 
-  catalog:
-    warehouse: default
-    endpoint: http://lakehouse.io
-    access_key: admin
-    secret_key: password
-    region: ap-southeast-1
+catalog:
+  instances: 1
 
 warehouse:
   instances: 2
