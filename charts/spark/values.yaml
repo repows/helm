@@ -18,7 +18,14 @@ operator:
                   - master
 
 rbac:
-  namespaces:
-    - name: hub
-    - name: pipe
-    - name: spark
+  - name: default
+    namespace: hub
+
+  - name: default
+    namespace: spark
+
+  - name: dagster
+    namespace: dagster
+
+  - name: airflow
+    namespace: dagster
