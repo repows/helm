@@ -3,6 +3,21 @@ entries:
   airflow:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-11T17:32:44.782140626Z"
+    dependencies:
+    - condition: airflow.enabled
+      name: airflow
+      repository: https://airflow-helm.github.io/charts
+      version: 8.9.0
+    description: A Helm chart for Kubernetes
+    digest: 482c61c3c279a926a33d8b5a36a046900e4ece01f7693c3cbb43383ee8a79e8e
+    name: airflow
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/airflow-0.1.1/airflow-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-07-11T17:28:46.951051649Z"
     description: A Helm chart for Kubernetes
     digest: 2f84d0025c1476e23b8149506a42a674f0bf28cd37d48a054c07385e6b2cc430
@@ -582,4 +597,4 @@ entries:
     urls:
     - https://github.com/repows/helm/releases/download/visual-0.1.1/visual-0.1.1.tgz
     version: 0.1.1
-generated: "2024-07-11T17:28:47.338767299Z"
+generated: "2024-07-11T17:32:44.996910031Z"
