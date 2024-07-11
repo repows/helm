@@ -1,0 +1,127 @@
+global: { }
+
+
+airflow:
+  enabled: true
+
+  aws:
+    region: ""
+    accessKey: ""
+    secretKey: ""
+    credentials: |
+      [default]
+      aws_access_key_id = 
+      aws_secret_access_key =
+    config: |
+      [default]
+      region =
+
+  airflow:
+    image:
+      repository: repows.io/airflow
+      pullPolicy: Always
+      tag: 0.1
+
+    executor: KubernetesExecutor
+    fernetKey: ""
+    webserverSecretKey: ""
+
+    users:
+      - role: Admin
+        username: admin
+        password: password
+        email: admin@repows.com
+        firstName: admin
+        lastName: admin
+
+    connections:
+      - id: kubernetes
+        type: k8s
+        host: k8s://https://192.168.1.8:6443
+        description: Kubernetes in-cluster connection
+
+    defaultAffinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/role
+                  operator: In
+                  values:
+                    - master
+
+    kubernetesPodTemplate:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - worker
+            - weight: 50
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - master
+
+    extraEnv:
+      - name: AWS_REGION
+        valueFrom:
+          secretKeyRef:
+            name: airflow-aws-env
+            key: AWS_REGION
+
+      - name: AWS_ACCESS_KEY_ID
+        valueFrom:
+          secretKeyRef:
+            name: airflow-aws-env
+            key: AWS_ACCESS_KEY_ID
+
+      - name: AWS_SECRET_ACCESS_KEY
+        valueFrom:
+          secretKeyRef:
+            name: airflow-aws-env
+            key: AWS_SECRET_ACCESS_KEY
+
+  web:
+    service:
+      type: LoadBalancer
+
+  workers:
+    enabled: false
+
+  flower:
+    enabled: false
+
+  redis:
+    enabled: false
+
+  postgresql:
+    postgresqlDatabase: airflow
+    postgresqlUsername: postgres
+    postgresqlPassword: password
+
+    persistence:
+      storageClass: airflow
+      size: 12Gi
+
+    master:
+      nodeSelector:
+        kubernetes.io/hostname: master
+
+  logs:
+    persistence:
+      enabled: true
+      storageClass: airflow
+      existingClaim: airflow-logs-pvc
+      accessMode: ReadWriteMany
+      size: 8Gi
+
+  scheduler:
+    logCleanup:
+      enabled: false

@@ -1,0 +1,67 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: airflow
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: Immediate
+---
+{{- range $i, $e := until 1 -}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: airflow-postgresql-pv-{{ $i }}
+spec:
+  capacity:
+    storage: 12Gi
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: airflow
+  claimRef:
+    namespace: {{ $.Release.Namespace }}
+    name: data-airflow-postgresql-{{ $i }}
+  hostPath:
+    path: /kube/repows/airflow/postgresql-pv-{{ $i }}
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - master
+---
+{{- end -}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: airflow-logs-pv
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: airflow
+  claimRef:
+    namespace: {{ .Release.Namespace }}
+    name: airflow-logs-pvc
+  hostPath:
+    path: /kube/repows/airflow/logs-pv
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - master
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: airflow-logs-pvc
+spec:
+  storageClassName: airflow
+  accessModes: [ "ReadWriteMany" ]
+  volumeName: airflow-logs-pv
+  resources:
+    requests:
+      storage: 8Gi
+---

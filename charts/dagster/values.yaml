@@ -1,19 +1,24 @@
-global: { }
-
 nameOverride: ""
 fullnameOverride: ""
 
+global:
+  fullnameOverride: dagster
+  serviceAccountName: dagster
 
 dagster:
   enabled: true
-  fullnameOverride: dagster
-
-  global:
-    serviceAccountName: default
 
   aws:
+    region: ""
     accessKey: ""
     secretKey: ""
+    credentials: |
+      [default]
+      aws_access_key_id = 
+      aws_secret_access_key =
+    config: |
+      [default]
+      region =
 
   dagsterWebserver:
     image:
@@ -69,9 +74,9 @@ dagster:
         envConfigMaps:
           - name: dagster-typo-config
         volumes:
-          - name: dagster-aws
-            configMap:
-              name: dagster-aws
+          - name: dagster-aws-dir
+            secret:
+              secretName: dagster-aws-dir
           - name: dagster-data
             persistentVolumeClaim:
               claimName: dagster-typo-data-pvc
@@ -80,7 +85,7 @@ dagster:
               claimName: dagster-typo-storage-pvc
         volumeMounts:
           - mountPath: /root/.aws
-            name: dagster-aws
+            name: dagster-aws-dir
             readOnly: true
           - mountPath: /opt/dagster/app/data
             name: dagster-data
@@ -101,9 +106,9 @@ dagster:
         envConfigMaps:
           - name: dagster-euro-config
         volumes:
-          - name: dagster-aws
-            configMap:
-              name: dagster-aws
+          - name: dagster-aws-dir
+            secret:
+              secretName: dagster-aws-dir
           - name: dagster-data
             persistentVolumeClaim:
               claimName: dagster-euro-data-pvc
@@ -112,7 +117,7 @@ dagster:
               claimName: dagster-euro-storage-pvc
         volumeMounts:
           - mountPath: /root/.aws
-            name: dagster-aws
+            name: dagster-aws-dir
             readOnly: true
           - mountPath: /opt/dagster/app/data
             name: dagster-data
@@ -133,9 +138,9 @@ dagster:
         envConfigMaps:
           - name: dagster-codec-config
         volumes:
-          - name: dagster-aws
-            configMap:
-              name: dagster-aws
+          - name: dagster-aws-dir
+            secret:
+              secretName: dagster-aws-dir
           - name: dagster-data
             persistentVolumeClaim:
               claimName: dagster-codec-data-pvc
@@ -144,7 +149,7 @@ dagster:
               claimName: dagster-codec-storage-pvc
         volumeMounts:
           - mountPath: /root/.aws
-            name: dagster-aws
+            name: dagster-aws-dir
             readOnly: true
           - mountPath: /opt/dagster/app/data
             name: dagster-data
