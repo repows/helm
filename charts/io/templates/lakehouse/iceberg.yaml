@@ -13,15 +13,15 @@ stringData:
   REST_CREDENTIAL: "iceberg"  # connect to http://iceberg.io
 
   CATALOG_IO__IMPL: "org.apache.iceberg.aws.s3.S3FileIO"
-  CATALOG_WAREHOUSE: "s3://iceberg"
+  CATALOG_WAREHOUSE: "s3://euro/iceberg"
   CATALOG_S3_ENDPOINT: "http://lakehouse.io"
   CATALOG_S3_PATH__STYLE__ACCESS: "true"
   CATALOG_CACHE__ENABLED: "false"
 
   CATALOG_CATALOG__IMPL: "org.apache.iceberg.jdbc.JdbcCatalog"
   CATALOG_URI: "jdbc:postgresql://catalog.io:5432/iceberg"
-  CATALOG_JDBC_USER: "app"
-  CATALOG_JDBC_PASSWORD: "password"
+  CATALOG_JDBC_USER: "iceberg"
+  CATALOG_JDBC_PASSWORD: "iceberg"
 ---
 apiVersion: apps/v1
 kind: StatefulSet

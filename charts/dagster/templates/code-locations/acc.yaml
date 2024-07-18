@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dagster-acc-config
+  namespace: {{ .Release.Namespace }}
+data: { }
