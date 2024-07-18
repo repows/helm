@@ -398,6 +398,22 @@ entries:
   spark:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-07-18T11:29:43.27723187Z"
+    dependencies:
+    - alias: operator
+      condition: operator.enabled
+      name: spark-operator
+      repository: https://kubeflow.github.io/spark-operator
+      version: 1.2.15
+    description: A Helm chart for Kubernetes
+    digest: d1098ccb5938afdb65a4c81132a23c19878e7e8d04841d6e16c1cc2d81853267
+    name: spark
+    type: application
+    urls:
+    - https://github.com/repows/helm/releases/download/spark-0.1.12/spark-0.1.12.tgz
+    version: 0.1.12
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-07-18T11:25:19.930103609Z"
     dependencies:
     - alias: operator
@@ -708,4 +724,4 @@ entries:
     urls:
     - https://github.com/repows/helm/releases/download/visual-0.1.1/visual-0.1.1.tgz
     version: 0.1.1
-generated: "2024-07-18T11:25:19.930217401Z"
+generated: "2024-07-18T11:29:43.277311358Z"
