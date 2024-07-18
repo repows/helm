@@ -19,13 +19,13 @@ operator:
 
 rbac:
   - name: default
-    namespace: hub
+    ns: hub
 
   - name: default
-    namespace: spark
+    ns: spark
 
   - name: dagster
-    namespace: dagster
+    ns: dagster
 
   - name: airflow
-    namespace: dagster
+    ns: dagster

@@ -25,7 +25,6 @@ lakehouse:
       value: DEBUG
 
   service:
-    type: LoadBalancer
     ports:
       api: 80
 
@@ -44,6 +43,12 @@ lakehouse:
     storageClass: lakehouse
     existingClaim: lakehouse-pvc-0
     mountPath: /minio/data
+
+lakehouse-dns:
+  enabled: false
+  replicaCount: 1
+  fullnameOverride: lakehouse-dns
+  cloudflare_token: ""
 
 iceberg:
   instances: 1
@@ -65,6 +70,7 @@ opensearch:
   replicas: 1
 
   persistence:
+    size: 8Gi
     enabled: true
     storageClass: opensearch
 

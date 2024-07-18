@@ -18,7 +18,7 @@ spec:
               command:
                 - /bin/sh
                 - -c
-                - scrapy crawl {{ .name }} -s ENVIRONMENT=prod
+                - scrapy run {{ .name }} -s ENVIRONMENT=prod
           restartPolicy: Never
 ---
 {{- end -}}

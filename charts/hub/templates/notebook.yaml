@@ -96,7 +96,7 @@ spec:
   selector:
     app: hub-notebook
   type: LoadBalancer
-  loadBalancerIP: 192.168.1.88
+  loadBalancerIP: {{ .Values.notebook.service.host }}
   ports:
     - port: 80
       targetPort: 8888

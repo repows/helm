@@ -11,11 +11,11 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: spark-driver-{{ .name }}
+  name: spark-driver-{{ default .ns .name }}
 subjects:
   - kind: ServiceAccount
-    name: {{ .name }}
-    namespace: {{ .namespace }}
+    name: {{ default .ns .name }}
+    namespace: {{ default .ns }}
 roleRef:
   kind: ClusterRole
   name: spark-driver

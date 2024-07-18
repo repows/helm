@@ -13,7 +13,7 @@ spec:
           command:
             - /bin/sh
             - -c
-            - scrapy crawl player_attributes -s ENVIRONMENT=prod
+            - scrapy run player_attributes -s ENVIRONMENT=prod
           volumeMounts:
             - mountPath: /app/data
               name: one
