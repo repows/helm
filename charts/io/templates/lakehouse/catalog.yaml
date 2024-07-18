@@ -77,8 +77,8 @@ spec:
       version: 0
       name: create-app
       script: |
-        CREATE USER app PASSWORD 'password' SUPERUSER;
-        CREATE DATABASE iceberg OWNER app;
+        CREATE USER iceberg PASSWORD 'iceberg' SUPERUSER;
+        CREATE DATABASE iceberg OWNER iceberg;
 ---
 apiVersion: stackgres.io/v1
 kind: SGCluster
