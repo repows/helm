@@ -3,5 +3,12 @@ name: hub
 description: A Helm chart for Kubernetes
 
 type: application
-version: 0.1.2
+version: 0.1.3
 appVersion: "1.16.0"
+
+dependencies:
+  - alias: notebook-dns
+    version: 0.1.1
+    condition: notebook-dns.enabled
+    name: cloudflare-tunnel-remote
+    repository: https://cloudflare.github.io/helm-charts

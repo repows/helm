@@ -3,10 +3,16 @@ name: dagster
 description: A Helm chart for Kubernetes
 
 type: application
-version: 0.1.1
+version: 0.1.2
 appVersion: "1.16.0"
 
 dependencies:
   - name: dagster
     version: 1.7.6
     repository: https://dagster-io.github.io/helm
+
+  - alias: dagster-dns
+    version: 0.1.1
+    condition: dagster-dns.enabled
+    name: cloudflare-tunnel-remote
+    repository: https://cloudflare.github.io/helm-charts

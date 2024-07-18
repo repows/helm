@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dagster-euro-config
+  namespace: {{ .Release.Namespace }}
+data: { }

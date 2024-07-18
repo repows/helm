@@ -13,6 +13,12 @@ dependencies:
     condition: lakehouse.enabled
     repository: oci://registry-1.docker.io/bitnamicharts
 
+  - alias: lakehouse-dns
+    version: 0.1.1
+    name: cloudflare-tunnel-remote
+    condition: lakehouse-dns.enabled
+    repository: https://cloudflare.github.io/helm-charts
+
   - name: opensearch
     version: 2.21.0
     condition: opensearch.enabled

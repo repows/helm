@@ -60,42 +60,31 @@ dagster:
 
   dagster-user-deployments:
     deployments:
-      - name: typo
+      - name: acc
         image:
-          repository: "repows.io/dagster-typo"
+          repository: "repows.io/dagster-acc"
           tag: latest
           pullPolicy: Always
         dagsterApiGrpcArgs:
           - "--module-name"
-          - "typo"
+          - "acc"
         port: 3030
         includeConfigInLaunchedRuns:
           enabled: true
         envConfigMaps:
-          - name: dagster-typo-config
+          - name: dagster-acc-config
         volumes:
           - name: dagster-aws-dir
             secret:
               secretName: dagster-aws-dir
-          - name: dagster-data
-            persistentVolumeClaim:
-              claimName: dagster-typo-data-pvc
-          - name: dagster-storage
-            persistentVolumeClaim:
-              claimName: dagster-typo-storage-pvc
         volumeMounts:
           - mountPath: /root/.aws
             name: dagster-aws-dir
             readOnly: true
-          - mountPath: /opt/dagster/app/data
-            name: dagster-data
-          - mountPath: /opt/dagster/dagster_home/storage
-            name: dagster-storage
 
       - name: euro
         image:
           repository: "repows.io/dagster-euro"
-          tag: latest
           pullPolicy: Always
         dagsterApiGrpcArgs:
           - "--module-name"
@@ -109,49 +98,35 @@ dagster:
           - name: dagster-aws-dir
             secret:
               secretName: dagster-aws-dir
-          - name: dagster-data
-            persistentVolumeClaim:
-              claimName: dagster-euro-data-pvc
-          - name: dagster-storage
-            persistentVolumeClaim:
-              claimName: dagster-euro-storage-pvc
         volumeMounts:
           - mountPath: /root/.aws
             name: dagster-aws-dir
             readOnly: true
-          - mountPath: /opt/dagster/app/data
-            name: dagster-data
-          - mountPath: /opt/dagster/dagster_home/storage
-            name: dagster-storage
 
-      - name: codec
-        image:
-          repository: "repows.io/dagster-codec"
-          tag: latest
-          pullPolicy: Always
-        dagsterApiGrpcArgs:
-          - "--module-name"
-          - "codec"
-        port: 3030
-        includeConfigInLaunchedRuns:
-          enabled: true
-        envConfigMaps:
-          - name: dagster-codec-config
-        volumes:
-          - name: dagster-aws-dir
-            secret:
-              secretName: dagster-aws-dir
-          - name: dagster-data
-            persistentVolumeClaim:
-              claimName: dagster-codec-data-pvc
-          - name: dagster-storage
-            persistentVolumeClaim:
-              claimName: dagster-codec-storage-pvc
-        volumeMounts:
-          - mountPath: /root/.aws
-            name: dagster-aws-dir
-            readOnly: true
-          - mountPath: /opt/dagster/app/data
-            name: dagster-data
-          - mountPath: /opt/dagster/dagster_home/storage
-            name: dagster-storage
+      # - name: codec
+      #   image:
+      #     repository: "repows.io/dagster-codec"
+      #     tag: latest
+      #     pullPolicy: Always
+      #   dagsterApiGrpcArgs:
+      #     - "--module-name"
+      #     - "codec"
+      #   port: 3030
+      #   includeConfigInLaunchedRuns:
+      #     enabled: true
+      #   envConfigMaps:
+      #     - name: dagster-codec-config
+      #   volumes:
+      #     - name: dagster-aws-dir
+      #       secret:
+      #         secretName: dagster-aws-dir
+      #   volumeMounts:
+      #     - mountPath: /root/.aws
+      #       name: dagster-aws-dir
+      #       readOnly: true
+
+dagster-dns:
+  enabled: false
+  replicaCount: 1
+  cloudflare:
+    tunnel_token: ""
